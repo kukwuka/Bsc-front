@@ -11,7 +11,7 @@ import { InvestorsModule } from './investors/investors.module';
     }),
     TypeOrmModule.forRoot({
       type: 'sqlite',
-      database: 'db',
+      database: 'database.db',
       entities: [join(__dirname, '/**/*.entity{.ts,.js}')],
       synchronize: true,
     }),
