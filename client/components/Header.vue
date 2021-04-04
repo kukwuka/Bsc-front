@@ -1,12 +1,19 @@
 <template>
   <div class='header-description'>
     Описание проекта
+    <button @click='increment'></button>
   </div>
 </template>
 
 <script>
 export default {
   name: 'Header',
+  methods: {
+    increment() {
+      this.$store.commit('increment');
+      console.log(this.$store.state.count);
+    },
+  },
 };
 </script>
 
