@@ -9,11 +9,8 @@
           <Header />
         </el-header>
         <el-main>
-          <Main/>
+          <Main />
         </el-main>
-        <el-footer>
-          <Footer />
-        </el-footer>
       </el-container>
     </el-container>
   </div>
@@ -25,14 +22,12 @@ import 'reset-css';
 // @ is an alias to /src
 import Header from '../../components/Header.vue';
 import NavMenu from '../../components/NavMenu.vue';
-import Footer from '../../components/Footer.vue';
 import Main from '../../components/Main.vue';
 
 export default {
   name: 'Home',
   components: {
     Main,
-    Footer,
     NavMenu,
     Header,
   },

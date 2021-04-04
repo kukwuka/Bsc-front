@@ -24,7 +24,9 @@
     </el-submenu>
     <el-menu-item index='2'>
       <i class='el-icon-view'></i>
-      <router-link to='/'><span>Admin</span></router-link>
+      <router-link to='/' tag='el-menu-item'>
+        <span>Admin</span>
+      </router-link>
     </el-menu-item>
     <!--        <el-menu-item index='3' disabled>-->
     <!--          <i class='el-icon-document'></i>-->
@@ -83,6 +85,10 @@ img {
 .el-menu-item {
   font-family: Helvetica Neue,Helvetica,PingFang SC,
   Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
+}
+
+.el-menu-item a {
+  text-decoration: none;
 }
 
 </style>
