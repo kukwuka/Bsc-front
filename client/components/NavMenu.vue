@@ -14,16 +14,17 @@
     <el-submenu index='1'>
       <template #title>
         <i class='el-icon-user'></i>
-        <span>Users</span>
+        <span class='users'>Users</span>
       </template>
       <el-menu-item-group>
-        <el-menu-item index='1-1'>Private Investors</el-menu-item>
+        <el-menu-item index='1-1'><router-link to="/investors">Private Investors</router-link>
+        </el-menu-item>
         <el-menu-item index='1-2'>Not Private Investors</el-menu-item>
       </el-menu-item-group>
     </el-submenu>
     <el-menu-item index='2'>
       <i class='el-icon-view'></i>
-      <span>Admin</span>
+      <router-link to='/'><span>Admin</span></router-link>
     </el-menu-item>
     <!--        <el-menu-item index='3' disabled>-->
     <!--          <i class='el-icon-document'></i>-->
@@ -67,6 +68,11 @@ img {
   font-family: Jost, sans-serif !important;
   font-size: 20px;
   font-weight: 700;
+}
+
+.users {
+  font-family: Helvetica Neue,Helvetica,PingFang SC,
+  Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
 }
 
 .el-menu-item-group {

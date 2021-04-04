@@ -1,47 +1,30 @@
 <template>
-  <div id='app'>
-    <el-container>
-      <el-aside width='200px'>
-        <NavMenu />
-      </el-aside>
-      <el-container>
-        <el-header>
-          <Header />
-        </el-header>
-        <el-main>
-          <Main />
-        </el-main>
-        <el-footer>
-          <Footer />
-        </el-footer>
-      </el-container>
-    </el-container>
-  </div>
+<!--  <div id="nav">-->
+<!--    <router-link to="/">Home</router-link> |-->
+<!--    <router-link to="/about">About</router-link>-->
+<!--  </div>-->
+  <router-view/>
 </template>
 
-<script>
-// eslint-disable-next-line import/no-extraneous-dependencies
-import 'reset-css';
-import NavMenu from '../components/NavMenu.vue';
-import Footer from '../components/Footer.vue';
-import Header from '../components/Header.vue';
-import Main from '../components/Main.vue';
-
-export default {
-  name: 'App',
-  components: {
-    Main, Header, Footer, NavMenu,
-  },
-};
-
-</script>
-
 <style>
-
-.el-header {
-  background-color: #010a44;
-  text-align: right;
-  font-size: 12px
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
 }
 
+#nav {
+  padding: 30px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983;
+}
 </style>

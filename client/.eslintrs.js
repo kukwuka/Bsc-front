@@ -9,6 +9,6 @@ module.exports = {
   rules: {
     // override/add rules settings here, such as:
     // 'vue/no-unused-vars': 'error'
-    'linebreak-style': ["error", "windows"]
+    'linebreak-style': ['error', 'windows'],
   },
 };
