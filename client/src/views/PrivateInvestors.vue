@@ -19,6 +19,7 @@
 <script>
 // eslint-disable-next-line import/no-extraneous-dependencies
 import 'reset-css';
+
 // @ is an alias to /src
 import Header from '../../components/Header.vue';
 import NavMenu from '../../components/NavMenu.vue';

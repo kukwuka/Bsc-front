@@ -8,13 +8,10 @@ import router from './router';
 const store = createStore({
   state() {
     return {
-      count: 1,
+      URL: '',
     };
   },
   mutations: {
-    increment(state) {
-      state.count += 1;
-    },
   },
 });
 
