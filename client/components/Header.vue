@@ -1,7 +1,6 @@
 <template>
   <div class='header-description'>
-    Описание проекта
-    <button @click='increment'></button>
+    Top Holders
   </div>
 </template>
 
