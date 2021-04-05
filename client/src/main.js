@@ -6,12 +6,19 @@ import App from './App.vue';
 import router from './router';
 
 const store = createStore({
-  state() {
-    return {
-      URL: '',
-    };
+  state: {
+    backendURL: 'http://91.134.171.38',
   },
   mutations: {
+
+  },
+  actions: {
+
+  },
+  getters: {
+    get_server_URL(state) {
+      return state.backendURL;
+    },
   },
 });
 

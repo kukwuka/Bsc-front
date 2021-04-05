@@ -1,8 +1,6 @@
 <template>
   <el-table
-      :data='tableData
-    .filter(data => !search || data.blockchain_address.toLowerCase().includes(search
-    .toLowerCase()))'
+      :data='tableData'
       style='width: 100%'>
     <el-table-column type='expand'>
       <template #default='props'>
@@ -59,11 +57,11 @@
         </el-dialog>
         <el-dialog v-model='dialogFormVisibleEdit'>
           <el-form :model='formEdit'>
-            <el-form-item label='Password' :label-width='formLabelWidth'>
-              <el-input v-model='formEdit.password' autocomplete='off'></el-input>
+            <el-form-item :label-width='formLabelWidth'>
+              <el-checkbox v-model='checked'>Enabled</el-checkbox>
             </el-form-item>
             <el-form-item label="Sum To Sell" :label-width='formLabelWidth'>
-              <el-input v-model='formEdit.sum_to_sell' autocomplete='off'></el-input>
+              <el-input type="number" v-model='formEdit.sum_to_sell' autocomplete='off'></el-input>
             </el-form-item>
           </el-form>
           <template #footer>
@@ -80,7 +78,7 @@
         <el-button
             size='mini'
             @click='dialogFormVisibleEdit = true'
-            >Edit
+        >Edit
         </el-button>
         <el-button
             size='mini'
@@ -88,21 +86,38 @@
             @click='GeneratePassword(scope.$index)'>
           Generate Password
         </el-button>
+        <el-popconfirm
+            confirmButtonText='OK'
+            @confirm='DeleteUser(scope.$index)'
+            cancelButtonText='No, Thanks'
+            icon="el-icon-info"
+            iconColor="red"
+            title="Are you sure to delete this?"
+        >
+        <template #reference>
+          <el-button type="danger" icon="el-icon-delete"  circle>
+        </el-button>
+        </template>
+        </el-popconfirm>
       </template>
     </el-table-column>
   </el-table>
 </template>
 
 <script>
-import TableData from '../assets/TableData.json';
+// import TableData from '../assets/TableData.json';
+// import {mapGetters, mapActions} from 'vuex'
+// import Row from './Row.vue';
 
 const md5 = require('md5');
+const axios = require('axios');
 
 export default {
   name: 'Main',
+  components: {},
   data() {
     return {
-      tableData: TableData,
+      tableData: '',
       search: '',
       dialogFormVisible: false,
       dialogFormVisibleEdit: false,
@@ -116,16 +131,28 @@ export default {
         sum_to_sell: '',
       },
       formLabelWidth: '120px',
+      checked: false,
     };
   },
+  created() {
+    this.LoadProfiles();
+  },
+  computed: {
+  },
   methods: {
-    handleEdit(index, row) {
-      // eslint-disable-next-line
-      console.log(index, row);
+    async LoadProfiles() {
+      const response = await axios.get(`${this.$store.getters.get_server_URL}/profile/`);
+      this.tableData = response.data;
     },
     GeneratePasswordInForm() {
       this.form.password = md5(this.form.blockchain_address
           + new Date().getTime());
+    },
+    async DeleteUser(index) {
+      const response = await axios.delete(`${this.$store.getters.get_server_URL}/profile/${this.tableData[index].id}`);
+      // eslint-disable-next-line
+      console.log(response.status);
+      await this.LoadProfiles();
     },
     GeneratePassword(index) {
       // eslint-disable-next-line
@@ -148,18 +175,36 @@ export default {
         });
       }
     },
-    addItem() {
+    async addItem() {
       const myObject = {
         blockchain_address: this.form.blockchain_address,
         password: this.form.password,
       };
       this.tableData.push(myObject);
+      const request = await axios.post(`${this.$store.getters.get_server_URL}/profile/`, {
+        blockchain_address: this.form.blockchain_address,
+        password: this.form.password,
+        disabled: false,
+      });
+      // eslint-disable-next-line
+      console.log(request.status);
+      await this.LoadProfiles();
       this.form.blockchain_address = '';
       this.form.password = '';
     },
-    EditItem() {
+    EditItem(index) {
+      // eslint-disable-next-line
+      console.log();
+      const response = axios.put(`${this.$store.getters.get_server_URL}/profile/${this.tableData[index].id}`);
+      // eslint-disable-next-line
+      console.log(response.status);
     },
+
   },
+  mounted() {
+
+  },
+
 };
 </script>
 
