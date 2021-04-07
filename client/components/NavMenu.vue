@@ -17,22 +17,33 @@
         <span class='users'>Users</span>
       </template>
       <el-menu-item-group>
-        <el-menu-item index='1-1'><router-link to="/investors">Private Investors</router-link>
+        <el-menu-item index='1-1'>
+          <router-link to="/investors" class='ordinary' active-class='active'>
+            Private Investors
+        </router-link>
         </el-menu-item>
         <el-menu-item index='1-2'>Not Private Investors</el-menu-item>
       </el-menu-item-group>
     </el-submenu>
     <el-menu-item index='2'>
       <i class='el-icon-view'></i>
-      <router-link to='/' tag='el-menu-item'>
+      <router-link to='/' tag='el-menu-item' class='ordinary' active-class='active'>
         <span>Admin</span>
       </router-link>
     </el-menu-item>
-    <!--        <el-menu-item index='3' disabled>-->
-    <!--          <i class='el-icon-document'></i>-->
-    <!--          <span>Navigator Three</span>-->
-    <!--        </el-menu-item>-->
+    <el-menu-item index='3'>
+      <i class='el-icon-s-order'></i>
+      <router-link to='/table' tag='el-menu-item' class='ordinary' active-class='active'>
+        <span>Table of all users</span>
+      </router-link>
+    </el-menu-item>
     <el-menu-item index='4'>
+      <i class='el-icon-s-data'></i>
+      <router-link to='/graphics' tag='el-menu-item' class='ordinary' active-class='active'>
+        <span>Graphics</span>
+      </router-link>
+    </el-menu-item>
+    <el-menu-item index='5'>
       <i class='el-icon-setting'></i>
       <span>Settings</span>
     </el-menu-item>
@@ -51,6 +62,13 @@ export default {
   color: #333;
   min-height: 100vh;
 
+}
+.active {
+  color: rgb(255, 208, 75);
+}
+
+.ordinary {
+  color: white;
 }
 
 .logo-container {
@@ -83,6 +101,7 @@ img {
 }
 
 .el-menu-item {
+  color: white;
   font-family: Helvetica Neue,Helvetica,PingFang SC,
   Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
 }

@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 import Home from '@/views/Home.vue';
 import PrivateInvestors from '@/views/PrivateInvestors.vue';
+import TablePage from '@/views/TablePage.vue';
+import GraphicsView from '@/views/GraphicsView.vue';
 // import Footer from '../../components/Footer.vue';
 // import Header from '../../components/Header.vue';
 
@@ -24,6 +26,16 @@ const routes = [
     name: 'PrivateInvestors',
     component: PrivateInvestors,
 
+  },
+  {
+    path: '/table',
+    name: 'TablePage',
+    component: TablePage,
+  },
+  {
+    path: '/graphics',
+    name: 'Graphics',
+    component: GraphicsView,
   },
 ];
 
