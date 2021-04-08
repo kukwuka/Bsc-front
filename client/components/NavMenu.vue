@@ -27,19 +27,19 @@
     </el-submenu>
     <el-menu-item index='2'>
       <i class='el-icon-view'></i>
-      <router-link to='/' tag='el-menu-item' class='ordinary' active-class='active'>
+      <router-link to='/' tag='el-link' class='ordinary' active-class='active'>
         <span>Admin</span>
       </router-link>
     </el-menu-item>
     <el-menu-item index='3'>
       <i class='el-icon-s-order'></i>
-      <router-link to='/table' tag='el-menu-item' class='ordinary' active-class='active'>
+      <router-link to='/table' tag='el-link' class='ordinary' active-class='active'>
         <span>Table of all users</span>
       </router-link>
     </el-menu-item>
     <el-menu-item index='4'>
       <i class='el-icon-s-data'></i>
-      <router-link to='/graphics' tag='el-menu-item' class='ordinary' active-class='active'>
+      <router-link to='/graphics' tag='el-link' class='ordinary' active-class='active'>
         <span>Graphics</span>
       </router-link>
     </el-menu-item>

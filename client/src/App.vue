@@ -1,9 +1,13 @@
 <template>
-  <router-view/>
+  <router-view v-if="this.$store.getters.get_Authorized"/>
+  <Login v-else/>
 </template>
 
 <script>
-
+import Login from "../components/Login";
+export default {
+  components: {Login}
+}
 </script>
 
 <style>

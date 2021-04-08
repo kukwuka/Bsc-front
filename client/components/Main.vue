@@ -141,7 +141,11 @@ export default {
   },
   methods: {
     async LoadProfiles() {
-      const response = await axios.get(`${this.$store.getters.get_server_URL}/profile/`);
+      const response = await axios.get(`${this.$store.getters.get_server_URL}/profile/`, {
+       headers: {
+         'Authorization' : `Token ${this.$store.getters.get_token}`
+       }
+      });
       this.tableData = response.data;
     },
     GeneratePasswordInForm() {
@@ -149,7 +153,11 @@ export default {
           + new Date().getTime());
     },
     async DeleteUser(index) {
-      const response = await axios.delete(`${this.$store.getters.get_server_URL}/profile/${this.tableData[index].id}`);
+      const response = await axios.delete(`${this.$store.getters.get_server_URL}/profile/${this.tableData[index].id}`, {
+        headers: {
+          'Authorization' : `Token ${this.$store.getters.get_token}`
+        }
+      });
       // eslint-disable-next-line
       console.log(response.status);
       await this.LoadProfiles();
@@ -185,6 +193,10 @@ export default {
         blockchain_address: this.form.blockchain_address,
         password: this.form.password,
         disabled: false,
+      },{
+        headers: {
+          'Authorization' : `Token ${this.$store.getters.get_token}`
+        }
       });
       // eslint-disable-next-line
       console.log(request.status);

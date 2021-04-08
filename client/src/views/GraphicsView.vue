@@ -9,7 +9,6 @@
           <Header/>
         </el-header>
         <el-main>
-          sfa
         </el-main>
       </el-container>
     </el-container>
@@ -24,7 +23,7 @@ import NavMenu from '../../components/NavMenu.vue';
 
 export default {
   name: 'GraphicsView',
-  components: { NavMenu, Header },
+  components: {NavMenu, Header},
 };
 </script>
 
