@@ -4,8 +4,7 @@ import Home from '@/views/Home.vue';
 import PrivateInvestors from '@/views/PrivateInvestors.vue';
 import TablePage from '@/views/TablePage.vue';
 import GraphicsView from '@/views/GraphicsView.vue';
-// import Footer from '../../components/Footer.vue';
-// import Header from '../../components/Header.vue';
+import Profile from "@/views/Profile";
 
 const routes = [
   {
