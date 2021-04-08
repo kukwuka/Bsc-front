@@ -1,10 +1,17 @@
 <template>
-<div></div>
+  <div>
+  </div>
 </template>
 
 <script>
 export default {
-name: "Transaction"
+  name: "TransactionBuy",
+  props: ['buy'],
+  data() {
+    return {
+
+    }
+  }
 }
 </script>
 

@@ -9,7 +9,7 @@
           <Header />
         </el-header>
         <el-main>
-          <TransactionBuy />
+          <TransactionBuy  />
         </el-main>
       </el-container>
     </el-container>
@@ -30,7 +30,7 @@ import axios from "axios";
 export default {
   name: 'Profile',
   components: {
-    Transaction,
+    TransactionBuy,
     Main,
     NavMenu,
     Header,
