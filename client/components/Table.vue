@@ -1,12 +1,18 @@
 <template>
   <el-table
-      :data="tableData"
+      :data="tableData.filter(data => !search || data.address.toLowerCase().includes(search.toLowerCase()))"
       style="width: 100%;margin-bottom: 20px;"
       row-key="id"
       border
       default-expand-all
       @cell-click="HrefToBsc"
       :row-class-name="tableRowClassName">
+    <template #header>
+      <el-input
+          v-model="search"
+          size="mini"
+          placeholder="Type to search"/>
+    </template>
     <el-table-column
         prop="address"
         label="address"
@@ -80,14 +86,22 @@ export default {
       loaded: false,
       items: null,
       tableData: [],
+      search: '',
     };
   },
   async mounted() {
     this.loaded = false;
     try {
-      this.tableData = (await axios.get('http://91.134.171.38/addresses')).data;
+
+         const response = await axios.get(`${this.$store.getters.get_server_URL}/addresses`, {
+           headers: {
+             'Authorization' : `Token ${this.$store.getters.get_token}`
+           }
+         });
+      console.log(response.data);
+      this.tableData = response.data
       // eslint-disable-next-line
-      console.log(this.items);
+      console.log(this.tableData);
     } catch (e) {
       // eslint-disable-next-line
       console.log(e);

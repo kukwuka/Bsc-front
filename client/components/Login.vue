@@ -33,17 +33,16 @@ export default defineComponent({
     }
   },
   methods: {
-    sendDataByToken() {
-      const request = axios.post(`${this.$store.getters.get_server_URL}/auth/token/login/`, {
+    async sendDataByToken() {
+      const request = await axios.post(`${this.$store.getters.get_server_URL}/auth/token/login/`, {
         username: this.username,
         password: this.password,
-      }).then(response => (this.token = response.data))
+      }).then(response => (this.token = response.data.auth_token))
       this.$store.commit('set_token', this.token)
       console.log(this.token);
-      if (this.$store.getters.get_token) {
-        this.$store.commit('set_Authorized')
-      }
-      console.log(request);
+      this.$store.commit('set_Authorized', this.token)
+
+      console.log(this.$store.getters.get_token)
 
     }
   }

@@ -1,6 +1,6 @@
 <template>
   <el-table
-      :data='tableData'
+      :data="tableData"
       style='width: 100%'>
     <el-table-column type='expand'>
       <template #default='props'>

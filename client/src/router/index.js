@@ -37,6 +37,12 @@ const routes = [
     name: 'Graphics',
     component: GraphicsView,
   },
+  {
+    path: '/investors/:id',
+    name: 'Profile_detail',
+    component: Profile ,
+    props: true,
+  },
 ];
 
 const router = createRouter({

@@ -8,12 +8,12 @@ import router from './router';
 const store = createStore({
     state: {
         backendURL: 'http://91.134.171.38',
-        Authorized: true,
-        token: '6d03fdc5bf4a819de91384977e5d0234d045d19f'
+        Authorized: false,
+        token: ''
     },
     mutations: {
-        set_token(state, n) {
-            state.token = n
+        set_token(state, payload) {
+            state.token = payload
         },
         set_Authorized(state) {
             state.Authorized = true
