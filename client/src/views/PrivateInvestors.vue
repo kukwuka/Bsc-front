@@ -9,7 +9,7 @@
           <Header />
         </el-header>
         <el-main>
-          <Main />
+          <TableInvestors />
         </el-main>
       </el-container>
     </el-container>
@@ -23,11 +23,14 @@ import 'reset-css';
 // @ is an alias to /src
 import Header from '../../components/Header.vue';
 import NavMenu from '../../components/NavMenu.vue';
-import Main from '../../components/Main.vue';
+import Main from '../../components/Test.vue';
+import TableInvestors from "../../components/TableInvestors";
+
 
 export default {
   name: 'Home',
   components: {
+    TableInvestors,
     Main,
     NavMenu,
     Header,
