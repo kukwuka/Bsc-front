@@ -1,12 +1,21 @@
 <template>
   <div>
+    {{buy}}
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    buy:{
+      type:Object,
+      default(){
+        return{}
+      }
+    }
+  },
   name: "TransactionBuy",
-  props: ['buy'],
+
   data() {
     return {
 

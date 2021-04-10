@@ -11,24 +11,10 @@
     background-color='#010a44'
     text-color='#fff'
     active-text-color='#ffd04b'>
-    <el-submenu index='1'>
-      <template #title>
-        <i class='el-icon-user'></i>
-        <span class='users'>Users</span>
-      </template>
-      <el-menu-item-group>
-        <el-menu-item index='1-1'>
-          <router-link to="/investors" class='ordinary' active-class='active'>
-            Private Investors
-        </router-link>
-        </el-menu-item>
-        <el-menu-item index='1-2'>Not Private Investors</el-menu-item>
-      </el-menu-item-group>
-    </el-submenu>
-    <el-menu-item index='2'>
-      <i class='el-icon-view'></i>
-      <router-link to='/' tag='el-link' class='ordinary' active-class='active'>
-        <span>Admin</span>
+    <el-menu-item index='3'>
+      <i class='el-icon-s-order'></i>
+      <router-link to="/investors" class='ordinary' active-class='active'>
+        <span>Private investors</span>
       </router-link>
     </el-menu-item>
     <el-menu-item index='3'>
