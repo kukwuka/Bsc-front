@@ -19,9 +19,9 @@
         align="right"
         label="Operations">
       <template #header>
-        <el-button type='primary' round @click='dialogFormVisible = true'>Add new holder
+        <el-button type='primary' round @click='dialogFormVisible = true, click()'>Add new holder
         </el-button>
-        <el-dialog v-model='dialogFormVisible'>
+        <el-dialog :visible.sync='dialogFormVisible'>
           <el-form :model='form'>
             <el-form-item label='Address' :label-width='formLabelWidth'>
               <el-input v-model='form.blockchain_address' autocomplete='off'></el-input>
@@ -54,7 +54,7 @@
             iconColor="red"
             title="Are you sure to delete this?">
           <template #reference>
-            <el-button type="danger" icon="el-icon-delete"  circle>
+            <el-button type="danger" icon="el-icon-delete" circle>
             </el-button>
           </template>
         </el-popconfirm>
@@ -92,14 +92,17 @@ export default {
   created() {
     this.LoadProfiles();
   },
-  computed: {
-  },
+  computed: {},
   methods: {
+    click() {
+      console.log('saf');
+      console.log(this.dialogFormVisible)
+    },
     async LoadProfiles() {
       const response = await axios.get(`${this.$store.getters.get_server_URL}/profile/`, {
-       headers: {
-         'Authorization' : `Token ${this.$store.getters.get_token}`
-       }
+        headers: {
+          'Authorization': `Token ${this.$store.getters.get_token}`
+        }
       });
       this.tableData = response.data;
     },
@@ -108,14 +111,34 @@ export default {
           + new Date().getTime());
     },
     async DeleteUser(index) {
-      const response = await axios.delete(`${this.$store.getters.get_server_URL}/profile/${this.tableData[index].id}`, {
-        headers: {
-          'Authorization' : `Token ${this.$store.getters.get_token}`
+      try {
+        const response = await axios.delete(`${this.$store.getters.get_server_URL}/profile/${this.tableData[index].id}`, {
+          headers: {
+            'Authorization': `Token ${this.$store.getters.get_token}`
+          }
+        }).catch((err) => {
+          this.$notify({
+            title: 'Error',
+            message: 'Всё плохо , переживайте',
+            type: 'error'
+          });
+        });
+        if (response.status === 200) {
+          this.$notify({
+            title: 'Success',
+            message: 'Всё хорошо , не переживайте',
+            type: 'success'
+          });
         }
-      });
-      // eslint-disable-next-line
-      console.log(response.status);
-      await this.LoadProfiles();
+        // eslint-disable-next-line
+        console.log(response.status);
+        await this.LoadProfiles();
+
+
+      } catch (e) {
+        console.log(e)
+      }
+
     },
     async addItem() {
       const myObject = {
@@ -127,9 +150,9 @@ export default {
         blockchain_address: this.form.blockchain_address,
         password: this.form.password,
         disabled: false,
-      },{
+      }, {
         headers: {
-          'Authorization' : `Token ${this.$store.getters.get_token}`
+          'Authorization': `Token ${this.$store.getters.get_token}`
         }
       });
       // eslint-disable-next-line
@@ -138,7 +161,7 @@ export default {
       this.form.password = '';
     },
     showDetails(index) {
-      this.$router.push({ path: `/investors/${this.tableData[index].id}` })
+      this.$router.push({path: `/investors/${this.tableData[index].id}`})
       // console.log('fas')
     }
   },

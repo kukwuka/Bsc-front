@@ -4,8 +4,7 @@
       <el-input
           placeholder="Please input username"
           v-model="username"
-          clearable
-          @change="getUsername">
+          clearable>
       </el-input>
     </el-row>
     <el-row>
@@ -39,10 +38,24 @@ export default {
       const request = await axios.post(`${this.$store.getters.get_server_URL_login}/auth/token/login/`, {
         username: this.username,
         password: this.password,
-      }).then(response => (this.token = response.data.auth_token))
-      this.$store.commit('set_token', this.token)
-      // console.log(this.token);
-      this.$store.commit('set_Authorized', this.token)
+      })
+          .then(response => (
+              this.token = response.data.auth_token
+
+          )).then(() => {
+            this.$store.commit('set_token', this.token);
+            this.$store.commit('set_Authorized', this.token);
+          })
+          .catch((err) => {
+
+            this.$notify({
+              title: 'Error',
+              message: 'Всё плохо , переживайте',
+              type: 'error'
+            });
+
+          })
+
 
       // console.log(this.$store.getters.get_token)
 

@@ -1,9 +1,6 @@
 <template>
   <div id='transaction'
-       v-loading="!LoadingPage"
-       element-loading-text="Loading..."
-       element-loading-spinner="el-icon-loading"
-       element-loading-background="rgba(0, 0, 0, 0.8)"
+       v-loading.fullscreen.lock="!LoadingPage"
   >
     <h1>Пользователь по адресу
 

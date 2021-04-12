@@ -16,6 +16,9 @@ export default new Vuex.Store({
         },
         set_Authorized(state) {
             state.Authorized = true
+        },
+        set_Authoruzed_LogOut(state, payload) {
+            state.Authorized = payload
         }
     },
     actions: {},
@@ -34,3 +37,28 @@ export default new Vuex.Store({
         }
     },
 })
+
+//<script>
+// import {Line} from 'vue-chartjs'
+// export default {
+//   name: "graphsBuySoldBusd",
+//   extends: Line,
+//   props: {
+//     chartData: {
+//       type: Object,
+//       default: null
+//     },
+//     options: {
+//       type: Object,
+//       default: null
+//     }
+//   },
+//   mounted() {
+//     this.renderChart(this.chartData, this.options)
+//   }
+// }
+//
+// </script>
+//
+// <style scoped>
+// </style>

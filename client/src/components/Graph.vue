@@ -2,58 +2,97 @@
 import {Line} from 'vue-chartjs'
 //import GraphicsDate from "@/assets/graphics.json";
 import axios from "axios";
+
 export default {
   name: "Graph",
   extends: Line,
+  props: {
+    chartPropBuy: {
+      type: Array,
+      default() {
+        return {}
+      }
+    },
+    chartPropSell: {
+      type: Array,
+      default() {
+        return {}
+      }
+    },
+    LabelProp: {
+      type: Array,
+      default() {
+        return {
+
+        }
+      }
+    }
+  },
   data() {
     return {
+      different:[],
       loaded: false,
       chartData: {
         labels: null,
         datasets: [
           {
-            label: 'Сальдо DFX',
-            data: null
+            label: 'Продажа DFX',
+            data: null,
           },
+          {
+            label: 'Покупка DFX',
+            data: null,
+          }
         ]
       },
       options: {
         responsive: true,
-        maintainAspectRatio: false
+        maintainAspectRatio: false,
       }
     }
   },
   async mounted() {
-    this.loaded = false
-    try {
-      // Запрос на данные по покупкам и продажам
-      const ResponseGraphicsDate = await axios.get('http://91.134.171.38/api/buysold/')
-      this.chartData.labels = Object.keys(ResponseGraphicsDate.data)
-      let BuyArray = [];
-      let SoldArray = [];
-      for (let i = 0; i < Object.keys(ResponseGraphicsDate.data).length; i++) {
-        BuyArray.push(Object.values(ResponseGraphicsDate.data)[i].valueBusdBuy)
-        SoldArray.push(Object.values(ResponseGraphicsDate.data)[i].valueBusdSell)
-      }
-      let different = [];
-      for (let i = 0; i < BuyArray.length; i++) {
-        different.push((BuyArray[i] - SoldArray[i]))
-      }
-      this.chartData.datasets.data = different;
-      this.loaded = true
-      this.renderChart({
-            labels: this.chartData.labels,
-            datasets: [
-              {
-                label: 'Volume BUSD',
-                data: this.chartData.datasets.data,
-              },
-            ]
-          },
-          this.options)
-    } catch (e) {
-      console.error(e)
+
+    for (let i = 0; i < this.chartPropBuy.length; i++) {
+      this.different.push((this.chartPropBuy[i] - this.chartPropSell[i]))
     }
+
+
+    this.renderChart({
+          labels: this.LabelProp,
+          datasets: [
+            {
+              label: 'Покупка DFX',
+              data: this.chartPropBuy,
+              borderColor: '#77b7cd',
+              pointBackgroundColor: '#E52B50',
+              pointRadius: 3,
+              fill: false,
+            },
+            {
+              label: 'Продажа DFX',
+              data: this.chartPropSell,
+              borderColor: '#8B0000',
+              pointBackgroundColor: '#44944A',
+              pointRadius: 3,
+              fill: false,
+            },
+            {
+              label: 'Продажа DFX',
+              data: this.different,
+              borderColor: '#11349b',
+              pointBackgroundColor: '#000207',
+              pointRadius: 3,
+              fill: true,
+              backgroundColor:'#0f6b81',
+
+            }
+          ]
+        },
+        this.options)
+    // } catch (e) {
+    //   console.error(e)
+    // }
   }
 }
 </script>

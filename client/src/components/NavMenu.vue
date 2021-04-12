@@ -7,19 +7,17 @@
     <el-menu
         default-active='2'
         class='el-menu-vertical-demo'
-        @open='handleOpen'
-        @close='handleClose'
         background-color='#010a44'
         text-color='#fff'
         active-text-color='#ffd04b'>
       <el-menu-item index='3'>
-        <i class='el-icon-s-order'></i>
+        <i class='el-icon-user-solid'></i>
         <router-link :to="{name:'PrivateInvestors'}" class='ordinary' active-class='active'>
           <span>Private investors</span>
         </router-link>
       </el-menu-item>
       <el-menu-item index='3'>
-        <i class='el-icon-s-order'></i>
+        <i class='el-icon-user'></i>
         <router-link :to="{name:'TablePage'}" tag='el-link' class='ordinary' active-class='active'>
           <span>Table of all users</span>
         </router-link>
@@ -30,11 +28,15 @@
           <span>Graphics</span>
         </router-link>
       </el-menu-item>
-      <el-menu-item index='5'>
+      <el-menu-item  index='5'>
+        <i class='el-icon-s-tools'></i>
         <router-link :to="{name:'Settings'}" tag='el-link' class='ordinary' active-class='active'>
           <span>Settings</span>
         </router-link>
       </el-menu-item>
+      <div class="button">
+        <el-button round @click="LogOut()">Log out</el-button>
+      </div>
     </el-menu>
   </div>
 </template>
@@ -42,10 +44,21 @@
 <script>
 export default {
   name: 'NavMenu',
+  methods: {
+    LogOut() {
+      this.$store.commit('set_token', '')
+      this.$store.commit('set_Authoruzed_LogOut', false)
+      console.log(this.$store.getters.get_Authorized)
+    }
+  }
 };
 </script>
 
 <style>
+.button {
+  margin-top: 20px;
+  margin-left: 20px;
+}
 .el-aside {
   background-color: #010a44;
   color: #333;

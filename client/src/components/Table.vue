@@ -1,10 +1,7 @@
 <template>
   <el-table
       :data="tableData.filter(data => !search || data.address.toLowerCase().includes(search.toLowerCase()))"
-      v-loading="Loading"
-      element-loading-text="Loading..."
-      element-loading-spinner="el-icon-loading"
-      element-loading-background="rgba(0, 0, 0, 0.8)"
+      v-loading.fullscreen.lock="!LoadingPage"
       style="width: 100%;margin-bottom: 20px;"
       row-key="id"
       border
@@ -91,7 +88,7 @@ export default {
       items: null,
       tableData: [],
       search: '',
-      Loading:false
+      LoadingPage:true
     };
   },
   async mounted() {
