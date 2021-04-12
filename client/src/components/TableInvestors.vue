@@ -139,7 +139,7 @@ export default {
     },
     showDetails(index) {
       this.$router.push({ path: `/investors/${this.tableData[index].id}` })
-      console.log('fas')
+      // console.log('fas')
     }
   },
   mounted() {

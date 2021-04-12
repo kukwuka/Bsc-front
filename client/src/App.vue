@@ -1,12 +1,38 @@
 <template>
-  <router-view v-if="this.$store.getters.get_Authorized"/>
+  <div id='home' v-if="this.$store.getters.get_Authorized" >
+    <el-container>
+      <el-aside width='200px'>
+        <NavMenu />
+      </el-aside>
+      <el-container>
+        <el-header>
+          <Header />
+        </el-header>
+        <el-main>
+          <router-view />
+        </el-main>
+      </el-container>
+    </el-container>
+  </div>
+
   <Login v-else/>
 </template>
 
 <script>
-import Login from "../components/Login";
+import Header from './components/Header.vue';
+import NavMenu from './components/NavMenu.vue';
+import Main from './components/Test.vue';
+
+import Login from "./components/Login";
+import TableInvestors from "./components/TableInvestors";
 export default {
-  components: {Login}
+  components: {
+    TableInvestors,
+    Main,
+    NavMenu,
+    Header,
+    Login,
+  },
 }
 </script>
 

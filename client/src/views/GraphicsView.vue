@@ -1,25 +1,14 @@
 <template>
-  <div id='home'>
-    <el-container>
-      <el-aside width='200px'>
-        <NavMenu/>
-      </el-aside>
-      <el-container>
-        <el-header>
-          <Header/>
-        </el-header>
-        <el-main>
-        </el-main>
-      </el-container>
-    </el-container>
+  <div id='graphics'>
+
   </div>
 </template>
 
 <script>
 // eslint-disable-next-line import/no-extraneous-dependencies
-import 'reset-css';
-import Header from '../../components/Header.vue';
-import NavMenu from '../../components/NavMenu.vue';
+
+import Header from '../components/Header.vue';
+import NavMenu from '../components/NavMenu.vue';
 
 export default {
   name: 'GraphicsView',

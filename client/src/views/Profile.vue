@@ -1,57 +1,80 @@
 <template>
-  <div id='home'>
-    <el-container>
-      <el-aside width='200px'>
-        <NavMenu />
-      </el-aside>
-      <el-container>
-        <el-header>
-          <Header />
-        </el-header>
-        <el-main>
-          <TransactionBuy  />
-        </el-main>
-      </el-container>
-    </el-container>
+  <div id='transaction'
+       v-loading="!LoadingPage"
+       element-loading-text="Loading..."
+       element-loading-spinner="el-icon-loading"
+       element-loading-background="rgba(0, 0, 0, 0.8)"
+  >
+    <h1>Пользователь по адресу
+
+        {{ UserInfo['blockchain_address'] }}
+
+    </h1>
+
+    <ProfileBalance :balance="TransactionData.balance"/>
+    <ProfileEdit :user_info="UserInfo"/>
+
+    <h2>Транзакции пользователя через PanckeSwap</h2>
+    <Transaction :table="TransactionData.buy" :label="'Покупки Dfx'" v-if="LoadingPage"/>
+    <Transaction :table="TransactionData.sold" :label="'Продажи Dfx'" v-if="LoadingPage"/>
+
   </div>
 </template>
 
 <script>
 // eslint-disable-next-line import/no-extraneous-dependencies
-import 'reset-css';
+
 
 // @ is an alias to /src
-import Header from '../../components/Header.vue';
-import NavMenu from '../../components/NavMenu.vue';
-import Main from '../../components/Test.vue';
-import TransactionBuy from "../../components/TransactionBuy";
+
+import Transaction from "../components/Profile/Transaction";
+import ProfileBalance from "../components/Profile/ProfileBalance"
+import ProfileEdit from "../components/Profile/ProfileEdit"
+
 import axios from "axios";
 
 export default {
   name: 'Profile',
   components: {
-    TransactionBuy,
-    Main,
-    NavMenu,
-    Header,
+    Transaction,
+    ProfileBalance,
+    ProfileEdit,
+
+
   },
   data() {
     return {
-      TransactionData: {}
+      TransactionData: {},
+      UserInfo: {},
+      LoadingPage: false
     }
   },
-  created() {
-    this.LoadProfiles();
+  async created() {
+    this.LoadingPage = false;
+    await this.LoadProfiles();
+    await this.LoadUserInfo();
+    this.LoadingPage = true;
   },
   methods: {
     async LoadProfiles() {
       const response = await axios.get(`${this.$store.getters.get_server_URL}/transactions/${this.$route.params.id}`, {
         headers: {
-          'Authorization' : `Token ${this.$store.getters.get_token}`
+          'Authorization': `Token ${this.$store.getters.get_token}`
         }
       });
-      this.tableData = response.data;
-      console.log(this.tableData);
+      this.TransactionData = response.data;
+      // console.log(this.TransactionData.balance);
+
+    },
+    async LoadUserInfo() {
+
+      const response = await axios.get(`${this.$store.getters.get_server_URL}/profile/${this.$route.params.id}`, {
+        headers: {
+          'Authorization': `Token ${this.$store.getters.get_token}`
+        }
+      });
+      this.UserInfo = response.data;
+      // console.log(this.TransactionData.balance);
     },
   }
 };

@@ -1,6 +1,10 @@
 <template>
   <el-table
       :data="tableData.filter(data => !search || data.address.toLowerCase().includes(search.toLowerCase()))"
+      v-loading="Loading"
+      element-loading-text="Loading..."
+      element-loading-spinner="el-icon-loading"
+      element-loading-background="rgba(0, 0, 0, 0.8)"
       style="width: 100%;margin-bottom: 20px;"
       row-key="id"
       border
@@ -87,10 +91,11 @@ export default {
       items: null,
       tableData: [],
       search: '',
+      Loading:false
     };
   },
   async mounted() {
-    this.loaded = false;
+    this.Loading = true;
     try {
 
          const response = await axios.get(`${this.$store.getters.get_server_URL}/addresses`, {
@@ -98,14 +103,15 @@ export default {
              'Authorization' : `Token ${this.$store.getters.get_token}`
            }
          });
-      console.log(response.data);
+      // console.log(response.data);
       this.tableData = response.data
       // eslint-disable-next-line
-      console.log(this.tableData);
+      // console.log(this.tableData);
     } catch (e) {
       // eslint-disable-next-line
       console.log(e);
     }
+    this.Loading = false;
   },
   methods: {
     HrefToBsc(row) {

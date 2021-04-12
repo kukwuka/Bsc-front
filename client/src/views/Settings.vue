@@ -1,16 +1,91 @@
 <template>
-  <div id='home'>
-          Действия админа
+  <div id='home'
+       v-loading="Loading"
+       element-loading-text="Loading..."
+       element-loading-spinner="el-icon-loading"
+       element-loading-background="rgba(0, 0, 0, 0.8)"
+  >
+  {{AdminInfo}}
+    <el-form-item label="username  ">
+      <el-input
+          placeholder="ot authenticated("
+          v-model="AdminInfo['username']"
+          :disabled="true">
+      </el-input>
+    </el-form-item>
+
+      <el-form-item label="last_name  ">
+        <el-input
+            placeholder="No last name"
+            v-model="AdminInfo['last_name']"
+            :disabled="true">
+        </el-input>
+      </el-form-item>
+    <el-form-item label="email  ">
+      <el-input
+          placeholder="no Email"
+          v-model="AdminInfo['email']"
+          :disabled="true">
+      </el-input>
+    </el-form-item>
+
+    <h2>Изменить Телеграм Username</h2>
+    <el-form-item label="Tg username  ">
+      <el-input
+          placeholder="no Email"
+          v-model="TgName"
+          :disabled="false">
+      </el-input>
+    </el-form-item>
+    <el-button
+
+        type='primary'
+        @click='SaveTG()'>
+      Save Tg name
+    </el-button>
+
+
   </div>
 </template>
 
 <script>
-import NavMenu from '../components/NavMenu.vue';
-import Header from '../components/Header.vue';
+const axios = require('axios');
 
 export default {
-  name: 'Home',
-  components: { Header, NavMenu },
+  name: 'Settings',
+  data() {
+    return {
+      AdminInfo: {},
+      loading: true,
+      TgName:'',
+    }
+  },
+  async mounted() {
+    this.loading = true;
+    await this.LoadAdmin();
+    this.loading = false;
+  },
+  methods: {
+    async SaveTG(){
+      const request = await axios.post(`${this.$store.getters.get_server_URL}/changetgname/`, {
+        new_tg_username: this.TgName,
+      },{
+        headers: {
+          'Authorization' : `Token ${this.$store.getters.get_token}`
+        }
+      });
+    },
+    async LoadAdmin() {
+      const response = await axios.get(`${this.$store.getters.get_server_URL}/admininfo/`, {
+        headers: {
+          'Authorization': `Token ${this.$store.getters.get_token}`
+        }
+      });
+      this.AdminInfo = response.data;
+      console.log(response.data)
+    },
+  }
+
 };
 </script>
 

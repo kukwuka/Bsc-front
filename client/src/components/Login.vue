@@ -1,30 +1,32 @@
 <template>
-  <el-row>
-  <el-input
-      placeholder="Please input username"
-      v-model="username"
-      clearable
-      @change="getUsername">
-  </el-input>
-  </el-row>
-  <el-row>
-  <el-input placeholder="Please input password"
-            v-model="password"
-            show-password>
-  </el-input>
-  </el-row>
-  <el-row>
-    <el-button round @click="sendDataByToken">Log In</el-button>
-  </el-row>
+  <div>
+    <el-row>
+      <el-input
+          placeholder="Please input username"
+          v-model="username"
+          clearable
+          @change="getUsername">
+      </el-input>
+    </el-row>
+    <el-row>
+      <el-input placeholder="Please input password"
+                v-model="password"
+                show-password>
+      </el-input>
+    </el-row>
+    <el-row>
+      <el-button round @click="sendDataByToken">Log In</el-button>
+    </el-row>
+  </div>
 
 
 </template>
 
 <script>
-import {defineComponent, ref} from 'vue'
+
 import axios from "axios";
 
-export default defineComponent({
+export default {
   data() {
     return {
       username: this.username,
@@ -34,19 +36,19 @@ export default defineComponent({
   },
   methods: {
     async sendDataByToken() {
-      const request = await axios.post(`${this.$store.getters.get_server_URL}/auth/token/login/`, {
+      const request = await axios.post(`${this.$store.getters.get_server_URL_login}/auth/token/login/`, {
         username: this.username,
         password: this.password,
       }).then(response => (this.token = response.data.auth_token))
       this.$store.commit('set_token', this.token)
-      console.log(this.token);
+      // console.log(this.token);
       this.$store.commit('set_Authorized', this.token)
 
-      console.log(this.$store.getters.get_token)
+      // console.log(this.$store.getters.get_token)
 
     }
   }
-})
+}
 </script>
 
 <style scoped>
@@ -55,6 +57,7 @@ export default defineComponent({
   margin-left: auto;
   width: 200px;
 }
+
 .el-row:nth-child(1) {
   margin-top: 350px;
   margin-bottom: 20px;

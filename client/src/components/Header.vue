@@ -11,7 +11,7 @@ export default {
     increment() {
       this.$store.commit('increment');
       // eslint-disable-next-line
-      console.log(this.$store.state.count);
+      // console.log(this.$store.state.count);
     },
   },
 };
