@@ -1,40 +1,42 @@
 <template>
-  <div class='logo-container'>
-    <img src='../../assets/logo.svg' alt='logoDFX'>
-    <div class='logo-description'>Admin Panel</div>
+  <div>
+    <div class='logo-container'>
+      <img src='../../assets/logo.svg' alt='logoDFX'>
+      <div class='logo-description'>Admin Panel</div>
+    </div>
+    <el-menu
+        default-active='2'
+        class='el-menu-vertical-demo'
+        @open='handleOpen'
+        @close='handleClose'
+        background-color='#010a44'
+        text-color='#fff'
+        active-text-color='#ffd04b'>
+      <el-menu-item index='3'>
+        <i class='el-icon-s-order'></i>
+        <router-link :to="{name:'PrivateInvestors'}" class='ordinary' active-class='active'>
+          <span>Private investors</span>
+        </router-link>
+      </el-menu-item>
+      <el-menu-item index='3'>
+        <i class='el-icon-s-order'></i>
+        <router-link :to="{name:'TablePage'}" tag='el-link' class='ordinary' active-class='active'>
+          <span>Table of all users</span>
+        </router-link>
+      </el-menu-item>
+      <el-menu-item index='4'>
+        <i class='el-icon-s-data'></i>
+        <router-link :to="{name:'Graphics'}" tag='el-link' class='ordinary' active-class='active'>
+          <span>Graphics</span>
+        </router-link>
+      </el-menu-item>
+      <el-menu-item index='5'>
+        <router-link :to="{name:'Settings'}" tag='el-link' class='ordinary' active-class='active'>
+          <span>Settings</span>
+        </router-link>
+      </el-menu-item>
+    </el-menu>
   </div>
-  <el-menu
-      default-active='2'
-      class='el-menu-vertical-demo'
-      @open='handleOpen'
-      @close='handleClose'
-      background-color='#010a44'
-      text-color='#fff'
-      active-text-color='#ffd04b'>
-    <el-menu-item index='3'>
-      <i class='el-icon-s-order'></i>
-      <router-link :to="{name:'PrivateInvestors'}" class='ordinary' active-class='active'>
-        <span>Private investors</span>
-      </router-link>
-    </el-menu-item>
-    <el-menu-item index='3'>
-      <i class='el-icon-s-order'></i>
-      <router-link :to="{name:'TablePage'}" tag='el-link' class='ordinary' active-class='active'>
-        <span>Table of all users</span>
-      </router-link>
-    </el-menu-item>
-    <el-menu-item index='4'>
-      <i class='el-icon-s-data'></i>
-      <router-link :to="{name:'Graphics'}" tag='el-link' class='ordinary' active-class='active'>
-        <span>Graphics</span>
-      </router-link>
-    </el-menu-item>
-    <el-menu-item index='5'>
-      <router-link :to="{name:'Settings'}" tag='el-link' class='ordinary' active-class='active'>
-        <span>Settings</span>
-      </router-link>
-    </el-menu-item>
-  </el-menu>
 </template>
 
 <script>

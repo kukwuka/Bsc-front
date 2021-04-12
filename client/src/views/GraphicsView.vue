@@ -1,18 +1,17 @@
 <template>
   <div id='graphics'>
-
+    <Graph/>
   </div>
 </template>
 
 <script>
 // eslint-disable-next-line import/no-extraneous-dependencies
 
-import Header from '../components/Header.vue';
-import NavMenu from '../components/NavMenu.vue';
+import Graph from "../components/Graph";
 
 export default {
   name: 'GraphicsView',
-  components: {NavMenu, Header},
+  components: {Graph},
 };
 </script>
 

@@ -16,12 +16,14 @@
   </div>
 
   <Login v-else/>
+
 </template>
 
 <script>
 import Header from './components/Header.vue';
 import NavMenu from './components/NavMenu.vue';
 import Main from './components/Test.vue';
+
 
 import Login from "./components/Login";
 import TableInvestors from "./components/TableInvestors";
